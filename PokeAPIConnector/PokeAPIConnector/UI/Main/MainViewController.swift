@@ -9,6 +9,9 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    //MARK: Properties
+    private var viewModel: MainViewModel?
+    
     //MARK: - IBOutlets
     @IBOutlet weak var sbPokemonSearch: UISearchBar!
     @IBOutlet weak var tvPokemonList: UITableView!
@@ -29,6 +32,11 @@ class MainViewController: UIViewController {
         tvPokemonList.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         
         pokemonManager.seePokemon()
+    }
+    
+    //MARK: - Functions
+    func set(viewModel: MainViewModel) {
+        self.viewModel = viewModel
     }
 
 }

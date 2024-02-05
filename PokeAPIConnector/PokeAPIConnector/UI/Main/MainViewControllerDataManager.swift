@@ -7,6 +7,10 @@
 
 import Foundation
 
+class MainViewControllerDataManager {
+    
+}
+
 protocol PokemonManagerDelegate {
     func showListPokemon(list: [Pokemon])
 }
