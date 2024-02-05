@@ -32,7 +32,7 @@ class CustomTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
+    /*
     func configureCell(with pokemon: Pokemon) {
         lbPokemonName.text = pokemon.name
         
@@ -58,4 +58,5 @@ class CustomTableViewCell: UITableViewCell {
             }.resume() // Iniciamos la tarea de URLSession para descargar la imagen
         }
     }
+     */
 }
