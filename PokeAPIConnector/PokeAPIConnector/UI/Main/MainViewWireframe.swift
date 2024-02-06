@@ -5,7 +5,7 @@
 //  Created by Daniel Cazorro Frias  on 5/2/24.
 //
 
-import Foundation
+import UIKit
 
 class MainViewWireframe {
     
@@ -29,6 +29,13 @@ class MainViewWireframe {
     
     private func createViewModel(with dataManager: MainViewControllerDataManager) -> MainViewModel {
         return MainViewModel(dataManager: MainViewControllerDataManager())
+    }
+    
+    // MARK: - Public methods
+    ///Función genérica para navegar a otro ViewController
+    func push(navigation: UINavigationController?) {
+        guard let navigation = navigation else { return }
+        navigation.pushViewController(viewController, animated: true)
     }
 }
 

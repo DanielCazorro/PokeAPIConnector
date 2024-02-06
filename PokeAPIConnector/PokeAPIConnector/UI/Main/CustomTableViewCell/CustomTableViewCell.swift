@@ -20,14 +20,7 @@ class CustomTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        lbPokemonName.text = "Pikachu"
+        
+        imPokemon.layer.cornerRadius = 15
     }
-    /*
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        lbPokemonName.text = nil
-        imPokemon.image = nil
-    }
-*/
- 
 }

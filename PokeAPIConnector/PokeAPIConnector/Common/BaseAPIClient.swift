@@ -10,6 +10,13 @@ import Alamofire
 import Combine
 import SwiftUI
 
+// FIXME: Este código espara elimianr el fallo de la línea 27
+class Environment {
+    static let shared = Environment() // Instancia compartida
+
+    let baseURL = "https://example.com/api" // URL base de la API
+}
+
 class BaseAPIClient {
 
     private var isReachable: Bool = true
@@ -17,10 +24,10 @@ class BaseAPIClient {
 
     private var baseURL: URL {
 
-        if let url = URL(string: Environment<Any>.shared.baseURL) {
+        if let url = URL(string: Environment.shared.baseURL) {
             return url
         } else {
-            print("error.url.invalid".localized)
+            print("error.url.invalid")
             return URL(string: "")!
         }
     }
