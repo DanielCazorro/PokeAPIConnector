@@ -11,8 +11,10 @@ class MainViewController: UIViewController {
     
     //MARK: Properties
     private var viewModel: MainViewModel?
+    private var wireframe = MainViewWireframe()
     var pokemonManager = PokemonManager()
     var pokemons: [Pokemon] = []
+    var pokemonChosen: Pokemon?
     
     //MARK: - IBOutlets
     @IBOutlet weak var sbPokemonSearch: UISearchBar!
@@ -50,7 +52,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tvPokemonList.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.lbPokemonName.text = pokemons[indexPath.row].name
+        cell.lbPokemonName.text = pokemons[indexPath.row].name.capitalized
         cell.lbAttack.text = "Ataque: \(pokemons[indexPath.row].attack)"
         cell.lbDefense.text = "Defensa: \(pokemons[indexPath.row].defense)"
         
@@ -75,6 +77,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             120
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        pokemonChosen = pokemons[indexPath.row]
+        
+        let detailVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        detailVC.showPokemon = pokemonChosen
+        
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
     }
 }
 extension MainViewController: PokemonManagerDelegate {
