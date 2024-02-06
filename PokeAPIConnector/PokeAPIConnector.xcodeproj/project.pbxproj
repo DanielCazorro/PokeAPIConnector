@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C70FFF12B72231300CEB5A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70FFEF2B72231300CEB5A2 /* DetailViewController.swift */; };
+		2C70FFF22B72231300CEB5A2 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C70FFF02B72231300CEB5A2 /* DetailViewController.xib */; };
+		2C70FFF42B72232400CEB5A2 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70FFF32B72232400CEB5A2 /* DetailViewModel.swift */; };
+		2C70FFF62B72233000CEB5A2 /* DetailViewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70FFF52B72233000CEB5A2 /* DetailViewDataManager.swift */; };
+		2C70FFF82B72233800CEB5A2 /* DetailViewWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70FFF72B72233800CEB5A2 /* DetailViewWireframe.swift */; };
 		2CABE52C2B6CFF35009E8123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABE52B2B6CFF35009E8123 /* AppDelegate.swift */; };
 		2CABE52E2B6CFF35009E8123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABE52D2B6CFF35009E8123 /* SceneDelegate.swift */; };
 		2CABE5352B6CFF35009E8123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CABE5342B6CFF35009E8123 /* Assets.xcassets */; };
@@ -26,6 +31,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C70FFEF2B72231300CEB5A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2C70FFF02B72231300CEB5A2 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		2C70FFF32B72232400CEB5A2 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		2C70FFF52B72233000CEB5A2 /* DetailViewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDataManager.swift; sourceTree = "<group>"; };
+		2C70FFF72B72233800CEB5A2 /* DetailViewWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewWireframe.swift; sourceTree = "<group>"; };
 		2CABE5282B6CFF35009E8123 /* PokeAPIConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeAPIConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CABE52B2B6CFF35009E8123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CABE52D2B6CFF35009E8123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +67,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C70FFEE2B7222F500CEB5A2 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2C70FFF02B72231300CEB5A2 /* DetailViewController.xib */,
+				2C70FFEF2B72231300CEB5A2 /* DetailViewController.swift */,
+				2C70FFF32B72232400CEB5A2 /* DetailViewModel.swift */,
+				2C70FFF52B72233000CEB5A2 /* DetailViewDataManager.swift */,
+				2C70FFF72B72233800CEB5A2 /* DetailViewWireframe.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		2CABE51F2B6CFF35009E8123 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +131,7 @@
 			children = (
 				2CABE5422B6D0067009E8123 /* LaunchScreen */,
 				2CABE5432B6D037E009E8123 /* Main */,
+				2C70FFEE2B7222F500CEB5A2 /* Detail */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -226,6 +249,7 @@
 			files = (
 				2CABE5382B6CFF35009E8123 /* LaunchScreen.storyboard in Resources */,
 				2CABE5472B6D0396009E8123 /* MainViewController.xib in Resources */,
+				2C70FFF22B72231300CEB5A2 /* DetailViewController.xib in Resources */,
 				2CB4C6862B70D29900FCE7F2 /* CustomTableViewCell.xib in Resources */,
 				2CABE5352B6CFF35009E8123 /* Assets.xcassets in Resources */,
 			);
@@ -239,13 +263,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB4C6972B7131E500FCE7F2 /* BaseAPIClient.swift in Sources */,
+				2C70FFF62B72233000CEB5A2 /* DetailViewDataManager.swift in Sources */,
 				2CB4C67F2B70D21700FCE7F2 /* MainViewModel.swift in Sources */,
+				2C70FFF82B72233800CEB5A2 /* DetailViewWireframe.swift in Sources */,
 				2CABE5462B6D0396009E8123 /* MainViewController.swift in Sources */,
+				2C70FFF12B72231300CEB5A2 /* DetailViewController.swift in Sources */,
 				2CB4C68D2B70F70B00FCE7F2 /* MainViewControllerDataManager.swift in Sources */,
 				2CB4C6812B70D22100FCE7F2 /* MainViewWireframe.swift in Sources */,
 				2CB4C6852B70D29900FCE7F2 /* CustomTableViewCell.swift in Sources */,
 				2CB4C67D2B70D15900FCE7F2 /* PokeAPI.swift in Sources */,
 				2CABE52C2B6CFF35009E8123 /* AppDelegate.swift in Sources */,
+				2C70FFF42B72232400CEB5A2 /* DetailViewModel.swift in Sources */,
 				2CB4C6992B71322900FCE7F2 /* BaseError.swift in Sources */,
 				2CABE52E2B6CFF35009E8123 /* SceneDelegate.swift in Sources */,
 				2CB4C6882B70DB1600FCE7F2 /* PokemonModel.swift in Sources */,
