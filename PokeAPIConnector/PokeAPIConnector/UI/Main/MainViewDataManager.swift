@@ -7,15 +7,42 @@
 
 import Foundation
 
-class MainViewControllerDataManager {
-    
+class MainViewDataManager {
+    func fetchPokemons(completion: @escaping (Result<[Pokemon], Error>) -> Void) {
+        let urlString = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedData = try decoder.decode([Pokemon].self, from: data)
+                completion(.success(decodedData))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
 }
+
 
 struct PokemonManager {
     var delegate: PokemonManagerDelegate?
     
     func seePokemon() {
-        // TODO: Comprobar esta url
         let urlString = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
         
         if let url = URL(string: urlString) {
@@ -38,10 +65,10 @@ struct PokemonManager {
             task.resume()
         }
     }
-    
+
     func parsearJson(pokemonData: Data) -> [Pokemon]? {
-        let decodificater = JSONDecoder()
         do {
+            let decodificater = JSONDecoder()
             let decodificatedData = try decodificater.decode([Pokemon].self, from: pokemonData)
             return decodificatedData
         } catch {
@@ -49,6 +76,7 @@ struct PokemonManager {
             return nil
         }
     }
+
 }
 
 protocol PokemonManagerDelegate {

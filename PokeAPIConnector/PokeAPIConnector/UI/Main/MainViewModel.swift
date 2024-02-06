@@ -9,10 +9,35 @@ import Foundation
 
 class MainViewModel {
     
-    private var dataManager: MainViewControllerDataManager
+    private var dataManager: MainViewDataManager
     
+    // Array observable para almacenar la lista de Pokémon y notificar cambios a la vista
+    var pokemons: [Pokemon] = [] {
+        didSet {
+            // Notificar a la vista cuando cambia la lista de Pokémon
+            pokemonsDidChange?(pokemons)
+        }
+    }
+    
+    // Closure para notificar a la vista cuando cambia la lista de Pokémon
+    var pokemonsDidChange: (([Pokemon]) -> Void)?
 
-    init(dataManager: MainViewControllerDataManager) {
+    init(dataManager: MainViewDataManager) {
         self.dataManager = dataManager
+    }
+    
+    
+    // Método para cargar la lista de Pokémon desde el data manager
+
+    func fetchPokemons() {
+        dataManager.fetchPokemons { [weak self] result in
+            switch result {
+            case .success(let pokemons):
+                self?.pokemons = pokemons
+            case .failure(let error):
+                // Manejar el error (por ejemplo, mostrar un mensaje de error en la vista)
+                print("Error fetching pokemons: \(error)")
+            }
+        }
     }
 }
