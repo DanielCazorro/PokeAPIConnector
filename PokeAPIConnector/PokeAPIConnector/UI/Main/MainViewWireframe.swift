@@ -5,4 +5,37 @@
 //  Created by Daniel Cazorro Frias  on 5/2/24.
 //
 
-import Foundation
+import UIKit
+
+class MainViewWireframe {
+    
+    //MARK: - Properties
+    
+    var viewController: MainViewController {
+        // Generating module components
+        let viewController = MainViewController()
+        let dataManager: MainViewControllerDataManager = createDataManager()
+        let viewModel: MainViewModel = createViewModel(with: dataManager)
+        viewController.set(viewModel: viewModel)
+        return viewController
+    }
+    
+    
+    // MARK: - Private methods
+    private func createDataManager() -> MainViewControllerDataManager {
+        let dataManager = MainViewControllerDataManager()
+        return dataManager
+    }
+    
+    private func createViewModel(with dataManager: MainViewControllerDataManager) -> MainViewModel {
+        return MainViewModel(dataManager: MainViewControllerDataManager())
+    }
+    
+    // MARK: - Public methods
+    ///Función genérica para navegar a otro ViewController
+    func push(navigation: UINavigationController?) {
+        guard let navigation = navigation else { return }
+        navigation.pushViewController(viewController, animated: true)
+    }
+}
+

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class MainViewModel {
+    
+    private var dataManager: MainViewControllerDataManager
+    
+
+    init(dataManager: MainViewControllerDataManager) {
+        self.dataManager = dataManager
+    }
+}
