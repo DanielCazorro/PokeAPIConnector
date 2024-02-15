@@ -18,25 +18,34 @@ class MainViewDataManager {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
+                print("Error fetching Pokémon data:", error.localizedDescription)
                 completion(.failure(error))
                 return
             }
             
             guard let data = data else {
+                print("No data received when fetching Pokémon")
                 completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
                 return
             }
             
+            // Print the raw data received from the API
+            if let dataString = String(data: data, encoding: .utf8) {
+                print("Raw Pokémon data:", dataString)
+            }
+            
             do {
                 let decoder = JSONDecoder()
-                let decodedData = try decoder.decode([Pokemon].self, from: data)
-                completion(.success(decodedData))
+                let decodedData = try decoder.decode([Pokemon?].self, from: data)
+                let filteredData = decodedData.compactMap { $0 }
+                completion(.success(filteredData))
             } catch {
                 completion(.failure(error))
             }
         }.resume()
     }
 }
+
 
 
 struct PokemonManager {
@@ -50,7 +59,7 @@ struct PokemonManager {
             
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil {
-                    print("Error al obtener datos de la API: ", error?.localizedDescription)
+                    print("Error al obtener datos de la API: ", error?.localizedDescription ?? "ERROR")
                     return
                 }
                 
@@ -65,7 +74,7 @@ struct PokemonManager {
             task.resume()
         }
     }
-
+    
     func parsearJson(pokemonData: Data) -> [Pokemon]? {
         do {
             let decodificater = JSONDecoder()
@@ -76,7 +85,7 @@ struct PokemonManager {
             return nil
         }
     }
-
+    
 }
 
 protocol PokemonManagerDelegate {

@@ -27,6 +27,9 @@ class MainViewController: UIViewController {
         configureViewModel()
         configureTableView()
         
+        tvPokemonList.rowHeight = UITableView.automaticDimension
+        //tvPokemonList.estimatedRowHeight = 140
+        
         viewModel?.fetchPokemons()
         /*
          pokemonManager.delegate = self
@@ -49,15 +52,15 @@ class MainViewController: UIViewController {
     
     // MARK: - ViewModel Configuration
     private func configureViewModel() {
-        //let dataManager = MainViewDataManager()
-        //let viewModel = MainViewModel(dataManager: dataManager)
+        let dataManager = MainViewDataManager()
+        let viewModel = MainViewModel(dataManager: dataManager)
         
         // Establecer el closure de cambio de pokémon para actualizar la vista cuando cambia la lista de pokémon
-        viewModel?.pokemonsDidChange = { [weak self] pokemons in
+        viewModel.pokemonsDidChange = { [weak self] pokemons in
             self?.updatePokemonList(with: pokemons)
         }
         
-        //self.viewModel = viewModel
+        self.viewModel = viewModel
     }
     
     // MARK: - TableView Configuration
@@ -82,11 +85,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         //pokemons.count
         viewModel?.pokemons.count ?? 0
     }
-    
+    /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         120
     }
-    
+    */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tvPokemonList.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         /*

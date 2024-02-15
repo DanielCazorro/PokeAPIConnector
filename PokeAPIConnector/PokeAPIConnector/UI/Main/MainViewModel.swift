@@ -35,8 +35,7 @@ class MainViewModel {
             case .success(let pokemons):
                 self?.pokemons = pokemons
             case .failure(let error):
-                // Manejar el error (por ejemplo, mostrar un mensaje de error en la vista)
-                print("Error fetching pokemons: \(error)")
+                print("Error fetching pokemons:", error)
             }
         }
     }
