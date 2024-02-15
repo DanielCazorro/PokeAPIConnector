@@ -8,6 +8,36 @@
 import Foundation
 
 class MainViewDataManager {
+    private var apiClient: MainAPIClient
+    
+    init(apiClient: MainAPIClient) {
+        self.apiClient = apiClient
+    }
+    
+    func getPokemonClosureNetwork(success: @escaping (Pokemon) -> Void, failure: @escaping (BaseError) -> Void) {
+        apiClient.getPokemonsList { pokemon in
+            print(pokemon)
+            success(pokemon)
+        } failure: { error in
+            failure(error)
+        }
+
+    }
+    
+    func getPokemonClosureBussines(success: @escaping (PokemonBussiness) -> Void, failure: @escaping (BaseError) -> Void) {
+        apiClient.getPokemonsList { pokemon in
+            let pokemons = pokemon.abilities.map({ PokemonName(from: $0) }).sorted()
+            print(pokemons)
+            success(pokemons)
+        } failure: { error in
+            failure(error)
+        }
+
+    }
+    
+}
+/*
+
     func fetchPokemons(completion: @escaping (Result<[Pokemon], Error>) -> Void) {
         let urlString = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
         
@@ -100,3 +130,4 @@ extension Data {
         return data
     }
 }
+*/

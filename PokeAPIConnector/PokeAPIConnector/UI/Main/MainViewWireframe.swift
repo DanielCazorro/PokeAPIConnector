@@ -30,7 +30,7 @@ class MainViewWireframe {
     }
     
     private func createViewModel(with dataManager: MainViewDataManager) -> MainViewModel {
-        return MainViewModel(dataManager: MainViewDataManager())
+        return MainViewModel(dataManager: dataManager)
     }
     
     // MARK: - Public methods
