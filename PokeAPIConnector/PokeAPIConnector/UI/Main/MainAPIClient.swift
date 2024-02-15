@@ -10,7 +10,7 @@ import Foundation
 class MainAPIClient: BaseAPIClient {
     
     let pokemonurl = "pokemon/charmander"
-    let pokemonListUrl = "pokemon?limit=151" // URL para obtener la lista de todos los Pokémon
+    let pokemonListUrl = "pokemon?limit=1000" // URL para obtener la lista de todos los Pokémon
 
     func getPokemonsList(success: @escaping (Pokemon) -> Void, failure: @escaping (BaseError) -> Void) {
         

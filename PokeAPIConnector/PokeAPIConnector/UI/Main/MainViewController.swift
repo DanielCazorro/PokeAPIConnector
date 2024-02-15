@@ -124,7 +124,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath)
                 if let pokemonName = viewModel?.pokemonName(at: indexPath.row) {
                     cell.textLabel?.text = pokemonName
                 }
