@@ -26,8 +26,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        responseViewModel()
-        viewModel?.reloadApi()
+        configureViewModel()
+        configureTableView()
+        viewModel?.fetchData()
         //configureViewModel()
         //configureTableView()
         
@@ -58,6 +59,28 @@ class MainViewController: UIViewController {
         viewModel?.reloadTableView.sink { [weak self] in
             self?.tvPokemonList.reloadData()
         }.store(in: &cancellables)
+    }
+    
+    // MARK: - ViewModel Configuration
+    private func configureViewModel() {
+        let dataManager = MainViewDataManager(apiClient: MainAPIClient())
+        let viewModel = MainViewModel(dataManager: dataManager)
+        
+        // Binding TableView Reload
+        viewModel.reloadTableView
+            .sink { [weak self] in
+                self?.tvPokemonList.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        self.viewModel = viewModel
+    }
+    
+    // MARK: - TableView Configuration
+    private func configureTableView() {
+        tvPokemonList.delegate = self
+        tvPokemonList.dataSource = self
+        tvPokemonList.register(UITableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
     /*
     // MARK: - ViewModel Configuration
@@ -93,7 +116,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //pokemons.count
-        viewModel?.rowsInSection() ?? 0
+        viewModel?.numberOfRoew() ?? 0
     }
     /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,9 +124,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = viewModel?.cellFor(row: indexPath.row)
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+                if let pokemonName = viewModel?.pokemonName(at: indexPath.row) {
+                    cell.textLabel?.text = pokemonName
+                }
+                return cell
+            }
         
         //let cell = tvPokemonList.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         /*
@@ -134,7 +160,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
          */
-    }
     
 }
 

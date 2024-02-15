@@ -32,7 +32,10 @@ class MainViewDataManager {
         } failure: { error in
             failure(error)
         }
-
+    }
+    
+    func getPokemonList(success: @escaping (Pokemon) -> Void, failure: @escaping (BaseError) -> Void) {
+        apiClient.getPokemonsList(success: success, failure: failure)
     }
     
 }

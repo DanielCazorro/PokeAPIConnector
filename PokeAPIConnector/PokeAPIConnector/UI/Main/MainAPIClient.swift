@@ -10,10 +10,11 @@ import Foundation
 class MainAPIClient: BaseAPIClient {
     
     let pokemonurl = "pokemon/charmander"
-    
+    let pokemonListUrl = "pokemon?limit=151" // URL para obtener la lista de todos los Pokémon
+
     func getPokemonsList(success: @escaping (Pokemon) -> Void, failure: @escaping (BaseError) -> Void) {
         
-        request(pokemonurl, method: .get, headers: [:], parameters: nil)
+        request(pokemonListUrl, method: .get, headers: [:], parameters: nil)
             .validate()
             .responseDecodable(of: Pokemon.self) { response in
                 self.handleResponse(success: success, failure: failure, dataResponse: response)

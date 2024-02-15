@@ -21,9 +21,39 @@ class MainViewModel {
     private var swNetwork: Bool = false
     private var swCombine: Bool = false
     let reloadTableView = PassthroughSubject<Void, Never>()
+    private var pokemons: [PokemonName]?
+    private var cancellables: Set<AnyCancellable> = []
     
     init(dataManager: MainViewDataManager) {
         self.dataManager = dataManager
+    }
+    
+    func fetchData() {
+        switch swNetwork {
+        case true:
+            dataManager.getPokemonClosureNetwork { [weak self] pokemon in
+                self?.pokemon = pokemon
+                self?.reloadTableView.send()
+            } failure: { error in
+                print(error)
+            }
+        case false:
+            dataManager.getPokemonClosureBussines(success: { [weak self] pokemonList in
+                self?.pokemons = pokemonList
+                self?.reloadTableView.send()
+            }, failure: { error in
+                print("Error fetching data:", error)
+            })
+        }
+    }
+    
+    func numberOfRoew() -> Int {
+        pokemons?.count ?? 0
+    }
+    
+    func pokemonName(at index: Int) -> String? {
+        guard let pokemons = pokemons, index < pokemons.count else { return nil }
+        return pokemons[index].name
     }
     
     //MARK: - Switch control
