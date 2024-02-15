@@ -23,7 +23,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         // Imagen para mostrar
         ivPokemonImage.loadFrom(URLAddress: showPokemon?.imageUrl ?? "")
         
@@ -32,6 +32,7 @@ class DetailViewController: UIViewController {
         lbPokemonAttack.text = "Ataque: \(showPokemon!.attack)"
         lbPokemonDeffense.text = "Defensa: \(showPokemon!.defense)"
         tvPokemonDescrption.text = showPokemon?.description ?? ""
+         */
     }
 
 
