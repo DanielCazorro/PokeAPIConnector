@@ -79,6 +79,15 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		2C72924A2B7DFD5500390D96 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2CB4C6962B7131E500FCE7F2 /* BaseAPIClient.swift */,
+				2CB4C6982B71322900FCE7F2 /* BaseError.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		2CABE51F2B6CFF35009E8123 = {
 			isa = PBXGroup;
 			children = (
@@ -169,8 +178,7 @@
 		2CB4C6952B7131AB00FCE7F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2CB4C6962B7131E500FCE7F2 /* BaseAPIClient.swift */,
-				2CB4C6982B71322900FCE7F2 /* BaseError.swift */,
+				2C72924A2B7DFD5500390D96 /* Base */,
 			);
 			path = Common;
 			sourceTree = "<group>";
