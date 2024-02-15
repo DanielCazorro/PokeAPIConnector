@@ -12,7 +12,7 @@ class MainViewWireframe {
     //MARK: - Properties
     var viewController: MainViewController {
         // Generating module components
-        let viewController = MainViewController()
+        let viewController: MainViewController = MainViewController(nibName: nil, bundle: nil)
         let dataManager: MainViewDataManager = createDataManager()
         let viewModel: MainViewModel = createViewModel(with: dataManager)
         viewController.set(viewModel: viewModel)
