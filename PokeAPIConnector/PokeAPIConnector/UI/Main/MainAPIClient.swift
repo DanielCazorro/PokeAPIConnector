@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PrincipalAPIClient: BaseAPIClient {
+class MainAPIClient: BaseAPIClient {
     
     let pokemonurl = "pokemon/charmander"
     

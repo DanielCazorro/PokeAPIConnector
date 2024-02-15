@@ -13,15 +13,19 @@ class MainViewWireframe {
     var viewController: MainViewController {
         // Generating module components
         let viewController: MainViewController = MainViewController(nibName: nil, bundle: nil)
-        let dataManager: MainViewDataManager = createDataManager()
+        let dataManager: MainViewDataManager = createDataManager(apiClient: apiClient)
         let viewModel: MainViewModel = createViewModel(with: dataManager)
         viewController.set(viewModel: viewModel)
         return viewController
     }
     
+    private var apiClient: MainAPIClient {
+        return MainAPIClient()
+    }
+    
     // MARK: - Private methods
-    private func createDataManager() -> MainViewDataManager {
-        let dataManager = MainViewDataManager()
+    private func createDataManager(apiClient: MainAPIClient) -> MainViewDataManager {
+        let dataManager = MainViewDataManager(apiClient: apiClient)
         return dataManager
     }
     
