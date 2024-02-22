@@ -36,6 +36,9 @@
                                 </label>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-pd-xlK">
                                     <rect key="frame" x="63" y="0.0" width="64.666666666666657" height="31"/>
+                                    <connections>
+                                        <action selector="swNetworkAction:" destination="-1" eventType="valueChanged" id="URq-e7-dJs"/>
+                                    </connections>
                                 </switch>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oz9-Ju-osW">
                                     <rect key="frame" x="125.66666666666666" y="0.0" width="63" height="31"/>
@@ -51,6 +54,9 @@
                                 </label>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HHd-CI-xE4">
                                     <rect key="frame" x="251.33333333333331" y="0.0" width="65" height="31"/>
+                                    <connections>
+                                        <action selector="swCombineAction:" destination="-1" eventType="valueChanged" id="BkN-v1-d2f"/>
+                                    </connections>
                                 </switch>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Combine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXi-kc-xbD">
                                     <rect key="frame" x="314.33333333333331" y="0.0" width="62.666666666666686" height="31"/>
