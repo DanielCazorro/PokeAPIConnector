@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="PokeAPIConnector" customModuleProvider="target">
             <connections>
                 <outlet property="sbPokemonSearch" destination="enh-aN-Qf8" id="9fW-p8-FnL"/>
+                <outlet property="swCombine" destination="HHd-CI-xE4" id="N48-T6-Bzu"/>
+                <outlet property="swNetwork" destination="ZgJ-pd-xlK" id="2u8-sF-Lma"/>
                 <outlet property="tvPokemonList" destination="4xM-Vi-Ypk" id="Gix-4M-aQh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="Sii-fS-TTw"/>
             </connections>
@@ -23,15 +25,50 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ag4-id-ews">
                     <rect key="frame" x="8" y="75" width="377" height="761"/>
                     <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hcg-su-EVc">
+                            <rect key="frame" x="0.0" y="0.0" width="377" height="31"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Negocio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVJ-ZG-wct">
+                                    <rect key="frame" x="0.0" y="0.0" width="63" height="31"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-pd-xlK">
+                                    <rect key="frame" x="63" y="0.0" width="64.666666666666657" height="31"/>
+                                </switch>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oz9-Ju-osW">
+                                    <rect key="frame" x="125.66666666666666" y="0.0" width="63" height="31"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Closure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1c-Db-gLd">
+                                    <rect key="frame" x="188.66666666666666" y="0.0" width="62.666666666666657" height="31"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HHd-CI-xE4">
+                                    <rect key="frame" x="251.33333333333331" y="0.0" width="65" height="31"/>
+                                </switch>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Combine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXi-kc-xbD">
+                                    <rect key="frame" x="314.33333333333331" y="0.0" width="62.666666666666686" height="31"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="enh-aN-Qf8">
-                            <rect key="frame" x="0.0" y="0.0" width="377" height="56"/>
+                            <rect key="frame" x="0.0" y="39" width="377" height="56"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="56" id="xih-JP-6QE"/>
                             </constraints>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4xM-Vi-Ypk">
-                            <rect key="frame" x="0.0" y="64" width="377" height="697"/>
+                            <rect key="frame" x="0.0" y="103" width="377" height="658"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
                     </subviews>

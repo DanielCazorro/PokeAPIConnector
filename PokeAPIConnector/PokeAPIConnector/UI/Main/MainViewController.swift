@@ -13,14 +13,12 @@ class MainViewController: UIViewController {
     //MARK: Properties
     private var viewModel: MainViewModel?
     private var cancellables: Set<AnyCancellable> = []
-    //private var wireframe = MainViewWireframe()
-    //var pokemonManager = PokemonManager()
-    //var pokemons: [Pokemon] = []
-    //var pokemonChosen: Pokemon?
     
     //MARK: - IBOutlets
     @IBOutlet weak var sbPokemonSearch: UISearchBar!
     @IBOutlet weak var tvPokemonList: UITableView!
+    @IBOutlet weak var swNetwork: UISwitch!
+    @IBOutlet weak var swCombine: UISwitch!
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -28,7 +26,6 @@ class MainViewController: UIViewController {
         
         configureViewModel()
         configureTableView()
-        viewModel?.fetchData()
         //configureViewModel()
         //configureTableView()
         
