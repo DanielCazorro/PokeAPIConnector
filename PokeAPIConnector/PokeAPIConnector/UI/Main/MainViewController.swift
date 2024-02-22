@@ -81,6 +81,7 @@ class MainViewController: UIViewController {
         tvPokemonList.delegate = self
         tvPokemonList.dataSource = self
         tvPokemonList.register(UITableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        tvPokemonList.largeContentTitle = "Pokemon"
     }
     /*
     // MARK: - ViewModel Configuration
