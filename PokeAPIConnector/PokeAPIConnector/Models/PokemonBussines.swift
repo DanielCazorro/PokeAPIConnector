@@ -11,10 +11,10 @@ typealias PokemonBussiness = [PokemonName]
 struct PokemonName: Codable, Comparable {
     let name: String
     
-    init(from ability: Ability) {
-        self.name = ability.ability.name
+    init(from ability: Ability, combine: Bool) {
+        self.name = combine ? ability.ability.name.uppercased() : ability.ability.name
     }
-    
+
     static func < (lhs: PokemonName, rhs: PokemonName) -> Bool {
         lhs.name < rhs.name
     }
