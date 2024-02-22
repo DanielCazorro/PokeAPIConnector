@@ -7,6 +7,8 @@
 
 import UIKit
 import Alamofire
+import Combine
+
 
 class BaseAPIClient {
 
@@ -73,9 +75,46 @@ class BaseAPIClient {
         return sesionManager.request(urlAbsolute, method: method, parameters: parameters, encoding: encoding, headers: HTTPHeaders(headers)).cURLDescription { p in
              print(p)
         }
-        
     }
+    
+    func requestPublisher<T: Decodable>(relativePath: String?,
+                                        method: HTTPMethod = .get,
+                                        parameters: Parameters? = nil,
+                                        urlEncoding: ParameterEncoding = JSONEncoding.default,
+                                        type: T.Type = T.self,
+                                        base: URL? = URL(string: "https://pokeapi.co/api/v2/"),
+                                        customHeaders: HTTPHeaders? = nil) -> AnyPublisher<T, BaseError> {
+        
+        guard let url = base, let path = relativePath else {
+            return Fail(error: BaseError.generic).eraseToAnyPublisher()
+        }
+        
+        guard let urlAbsolute = url.appendingPathComponent(path).absoluteString.removingPercentEncoding else {
+            return Fail(error: BaseError.generic).eraseToAnyPublisher()
+        }
 
+        return sesionManager.request(urlAbsolute, method: method, parameters: parameters, encoding: urlEncoding, headers: nil)
+            .validate()
+#if DEBUG
+            .cURLDescription(on: .main, calling: { p in print(p) })
+#endif
+            .publishDecodable(type: T.self, emptyResponseCodes: [204])
+            .tryMap({ response in
+               // print(String(decoding: response.data!, as: UTF8.self))
+                switch response.result {
+                case let .success(result):
+                    return result
+                case let .failure(error):
+                    // print(String(decoding: response.data!, as: UTF8.self))
+                    return error as! T
+                }
+            })
+            .mapError({ [weak self] error in
+                guard let self = self else { return .generic }
+                return self.handler(error: error) ?? .generic
+            })
+            .eraseToAnyPublisher()
+    }
 
     // MARK: - Private Method
 
