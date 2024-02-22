@@ -18,42 +18,16 @@ class MainViewModel {
     private var dataManager: MainViewDataManager
     private var pokemon: Pokemon?
     private var pokemonBussiness: PokemonBussiness?
-    private var swNetwork: Bool = false
+    private var swNetwork: Bool = true
     private var swCombine: Bool = false
+    
+    var cancellables: Set<AnyCancellable> = []
+    
     let reloadTableView = PassthroughSubject<Void, Never>()
-    private var pokemons: [PokemonName]?
-    private var cancellables: Set<AnyCancellable> = []
+    
     
     init(dataManager: MainViewDataManager) {
         self.dataManager = dataManager
-    }
-    
-    func fetchData() {
-        switch swNetwork {
-        case true:
-            dataManager.getPokemonClosureNetwork { [weak self] pokemon in
-                self?.pokemon = pokemon
-                self?.reloadTableView.send()
-            } failure: { error in
-                print(error)
-            }
-        case false:
-            dataManager.getPokemonClosureBussines(success: { [weak self] pokemonList in
-                self?.pokemons = pokemonList
-                self?.reloadTableView.send()
-            }, failure: { error in
-                print("Error fetching data:", error)
-            })
-        }
-    }
-    
-    func numberOfRoew() -> Int {
-        pokemons?.count ?? 0
-    }
-    
-    func pokemonName(at index: Int) -> String? {
-        guard let pokemons = pokemons, index < pokemons.count else { return nil }
-        return pokemons[index].name
     }
     
     //MARK: - Switch control
@@ -74,7 +48,6 @@ class MainViewModel {
         case .combine: swCombine
         }
     }
-    
     
     //MARK: - TableView datasource
     func rowsInSection() -> Int {
@@ -103,13 +76,22 @@ class MainViewModel {
         return nil
     }
     
+    
     //MARK -  Api calls
     func reloadApi() {
         switch swNetwork {
         case true:
-            getPokemonClosureNetwork()
+            if swCombine {
+                getPokemonCombineNetwork()
+            } else {
+                getPokemonClosureNetwork()
+            }
         case false:
-            getPokemonClosureBussines()
+            if swCombine {
+                getPokemonCombineBussines()
+            } else {
+                getPokemonClosureBussines()
+            }
         }
     }
     
@@ -130,35 +112,33 @@ class MainViewModel {
             print(error)
         }
     }
-}
-    /*
-    // Array observable para almacenar la lista de Pokémon y notificar cambios a la vista
-    var pokemons: [Pokemon] = [] {
-        didSet {
-            // Notificar a la vista cuando cambia la lista de Pokémon
-            pokemonsDidChange?(pokemons)
-        }
-    }
     
-    // Closure para notificar a la vista cuando cambia la lista de Pokémon
-    var pokemonsDidChange: (([Pokemon]) -> Void)?
-
-    init(dataManager: MainViewDataManager) {
-        self.dataManager = dataManager
-    }
-    
-    
-    // Método para cargar la lista de Pokémon desde el data manager
-
-    func fetchPokemons() {
-        dataManager.fetchPokemons { [weak self] result in
-            switch result {
-            case .success(let pokemons):
-                self?.pokemons = pokemons
-            case .failure(let error):
-                print("Error fetching pokemons:", error)
+    func getPokemonCombineNetwork() {
+        dataManager.getPokemonCombineNetwork()
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    print("Hay error \(error)")
+                }
+            } receiveValue: { [weak self] pokemon in
+                print("Recargo la tabla de Combine")
+                self?.pokemon = pokemon
+                self?.reloadTableView.send()
             }
-        }
+            .store(in: &cancellables)
     }
+    
+    func getPokemonCombineBussines() {
+        dataManager.getPokemonCombineBussines()
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    print("Hay error \(error)")
+                }
+            } receiveValue: { [weak self] pokemon in
+                print("Recargo la tabla de Combine")
+                self?.pokemonBussiness = pokemon
+                self?.reloadTableView.send()
+            }
+            .store(in: &cancellables)
+    }
+    
 }
-*/
