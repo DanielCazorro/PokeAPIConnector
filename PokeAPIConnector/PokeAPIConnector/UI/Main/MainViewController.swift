@@ -60,9 +60,17 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = viewModel?.cellFor(row: indexPath.row)
-        return cell
-    }
-    
-}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        // Configure the cell with data from the ViewModel
+         if let viewModel = viewModel {
+             let pokemonData = viewModel.pokemonDataFor(row: indexPath.row)
+             cell.lbPokemonName.text = pokemonData.name
+             // You can continue configuring other UI elements in the cell here
+         }
+         
+         return cell
+     }
+ }
