@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Alamofire
 
-class PrincipalAPIClient: BaseAPIClient {
+class MainAPIClient: BaseAPIClient {
     
     let pokemonurl = "pokemon/charmander"
     
