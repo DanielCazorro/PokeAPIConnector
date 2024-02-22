@@ -31,10 +31,10 @@ class CustomTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         // Reset the image to avoid displaying old data
-        imPokemon.image = nil
-        lbPokemonName.text = ""
-        lbAttack.text = ""
-        lbDefense.text = ""
+        //imPokemon.image = nil
+        //lbPokemonName.text = ""
+        //lbAttack.text = ""
+        //lbDefense.text = ""
         
     }
 }

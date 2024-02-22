@@ -12,11 +12,9 @@ class MainViewController: UIViewController {
     
     //MARK: Properties
     private var viewModel: MainViewModel?
-    private var cancellables: Set<AnyCancellable> = []
-    //private var wireframe = MainViewWireframe()
-    //var pokemonManager = PokemonManager()
-    //var pokemons: [Pokemon] = []
-    //var pokemonChosen: Pokemon?
+    var pokemonEntries: [PokemonEntry] = []
+    let pokeApi = PokeApi()
+    let pokemonSelectedApi = PokemonSelectedApi()
     
     //MARK: - IBOutlets
     @IBOutlet weak var sbPokemonSearch: UISearchBar!
@@ -26,28 +24,11 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureViewModel()
-        configureTableView()
-        viewModel?.fetchData()
-        //configureViewModel()
-        //configureTableView()
-        
-        //tvPokemonList.rowHeight = UITableView.automaticDimension
-        //tvPokemonList.estimatedRowHeight = 140
-        
-       // viewModel?.fetchPokemons()
-        /*
-         pokemonManager.delegate = self
-         
-         tvPokemonList.delegate = self
-         tvPokemonList.dataSource = self
-         
-         // Registrar la celda custom
-         tvPokemonList.register(UINib(nibName: CustomTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: CustomTableViewCell.identifier)
-         
-         // Ejecutar el método de búsqueda de pokemon
-         pokemonManager.seePokemon()
-         */
+        tvPokemonList.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
+
+
+        tvPokemonList.dataSource = self
+        fetchPokemonData()
     }
     
     //MARK: - Functions
@@ -55,139 +36,25 @@ class MainViewController: UIViewController {
         self.viewModel = viewModel
     }
     
-    func responseViewModel() {
-        viewModel?.reloadTableView.sink { [weak self] in
+    func fetchPokemonData() {
+        pokeApi.getData { [weak self] pokemonEntries in
+            self?.pokemonEntries = pokemonEntries
             self?.tvPokemonList.reloadData()
-        }.store(in: &cancellables)
-    }
-    
-    // MARK: - ViewModel Configuration
-    private func configureViewModel() {
-        let dataManager = MainViewDataManager(apiClient: MainAPIClient())
-        let viewModel = MainViewModel(dataManager: dataManager)
-        
-        // Binding TableView Reload
-        viewModel.reloadTableView
-            .sink { [weak self] in
-                self?.tvPokemonList.reloadData()
-            }
-            .store(in: &cancellables)
-        
-        self.viewModel = viewModel
-    }
-    
-    // MARK: - TableView Configuration
-    private func configureTableView() {
-        tvPokemonList.delegate = self
-        tvPokemonList.dataSource = self
-        tvPokemonList.register(UITableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
-    }
-    /*
-    // MARK: - ViewModel Configuration
-    private func configureViewModel() {
-        let dataManager = MainViewDataManager()
-        let viewModel = MainViewModel(dataManager: dataManager)
-        
-        // Establecer el closure de cambio de pokémon para actualizar la vista cuando cambia la lista de pokémon
-        viewModel.pokemonsDidChange = { [weak self] pokemons in
-            self?.updatePokemonList(with: pokemons)
-        }
-        
-        self.viewModel = viewModel
-    }
-    
-    // MARK: - TableView Configuration
-    private func configureTableView() {
-        tvPokemonList.delegate = self
-        tvPokemonList.dataSource = self
-        tvPokemonList.register(UINib(nibName: CustomTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: CustomTableViewCell.identifier)
-    }
-    
-    // MARK: - Helper Methods
-    private func updatePokemonList(with pokemons: [Pokemon]) {
-        DispatchQueue.main.async {
-            self.tvPokemonList.reloadData()
         }
     }
-    */
 }
 
-//MARK: - Extensions
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //pokemons.count
-        viewModel?.numberOfRoew() ?? 0
+        return pokemonEntries.count
     }
-    /*
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        120
-    }
-    */
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath)
-                if let pokemonName = viewModel?.pokemonName(at: indexPath.row) {
-                    cell.textLabel?.text = pokemonName
-                }
-                return cell
-            }
-        
-        //let cell = tvPokemonList.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
-        /*
-         cell.lbPokemonName.text = pokemons[indexPath.row].name.capitalized
-         cell.lbAttack.text = "Ataque: \(pokemons[indexPath.row].attack)"
-         cell.lbDefense.text = "Defensa: \(pokemons[indexPath.row].defense)"
-         
-         // Celda imagen desde URL
-         if let urlString = pokemons[indexPath.row].imageUrl as? String {
-         if let imageURL = URL(string: urlString) {
-         DispatchQueue.global().async {
-         guard let imageData = try? Data(contentsOf: imageURL) else
-         {return}
-         let image = UIImage(data: imageData)
-         DispatchQueue.main.async {
-         cell.imPokemon.image = image
-         }
-         }
-         }
-         }
-         
-         
-         return cell
-         */
-        /*
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else {
-            return UITableViewCell()
-        }
-        return cell
-         */
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
+
+        let pokemonEntry = pokemonEntries[indexPath.row]
+        cell.lbPokemonName.text = pokemonEntry.name ?? ""
+        // Aquí puedes agregar más configuraciones de celda según tus necesidades
+        return cell
+    }
 }
-
-func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    /*
-     pokemonChosen = pokemons[indexPath.row]
-     
-     let detailVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
-     detailVC.showPokemon = pokemonChosen
-     
-     self.navigationController?.pushViewController(detailVC, animated: true)
-     
-     }
-     */
-}
-
-/*
- extension MainViewController: PokemonManagerDelegate {
- 
- func showListPokemon(list: [Pokemon]) {
- pokemons = list
- 
- DispatchQueue.main.async {
- self.tvPokemonList.reloadData()
- }
- }
- 
- 
- }
- */
-
