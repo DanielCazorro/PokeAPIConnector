@@ -66,8 +66,8 @@ extension MainViewController: UITableViewDataSource {
         
         // Configure the cell with data from the ViewModel
          if let viewModel = viewModel {
-             let pokemonData = viewModel.pokemonDataFor(row: indexPath.row)
-             cell.lbPokemonName.text = pokemonData.name
+             let pokemonData = viewModel.cellFor(row: indexPath.row)
+             cell.lbPokemonName.text = pokemonData
              // You can continue configuring other UI elements in the cell here
          }
          
