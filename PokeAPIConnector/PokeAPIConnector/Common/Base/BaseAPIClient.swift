@@ -7,15 +7,6 @@
 
 import UIKit
 import Alamofire
-import Combine
-import SwiftUI
-
-// FIXME: Este código espara elimianr el fallo de la línea 27
-class Environment {
-    static let shared = Environment() // Instancia compartida
-
-    let baseURL = "https://example.com/api" // URL base de la API
-}
 
 class BaseAPIClient {
 
@@ -24,10 +15,9 @@ class BaseAPIClient {
 
     private var baseURL: URL {
 
-        if let url = URL(string: Environment.shared.baseURL) {
+        if let url = URL(string: "https://pokeapi.co/api/v2/") {
             return url
         } else {
-            print("error.url.invalid")
             return URL(string: "")!
         }
     }
@@ -47,6 +37,7 @@ class BaseAPIClient {
         startListenerReachability()
     }
 
+
     // MARK: - Public method
 
     func handler(error: Error?) -> BaseError? {
@@ -63,7 +54,7 @@ class BaseAPIClient {
     
     func handleResponse<A: Codable>(success: @escaping (A) -> Void, failure: @escaping (BaseError) -> Void, dataResponse: AFDataResponse<A>) {
         
-        if let baseError = self.handler(error: dataResponse.error) {
+        if let baseError = self.handler(error: dataResponse.error)  {
             failure(baseError)
             
         } else if let responseObject: A = dataResponse.value {
@@ -75,39 +66,16 @@ class BaseAPIClient {
     }
 
     func request(_ relativePath: String?,
-                 method: HTTPMethod = .get,
-                 parameters: Parameters? = nil) -> DataRequest {
+                 method: HTTPMethod = .get,headers: [String: String] = [:],
+                 parameters: Parameters? = nil, encoding: ParameterEncoding = JSONEncoding.default) -> DataRequest {
 
         let urlAbsolute = baseURL.appendingPathComponent(relativePath!)
-        return sesionManager.request(urlAbsolute, method: method, parameters: parameters, encoding: URLEncoding.default)
+        return sesionManager.request(urlAbsolute, method: method, parameters: parameters, encoding: encoding, headers: HTTPHeaders(headers)).cURLDescription { p in
+             print(p)
+        }
+        
     }
 
-    func requestPublisher<T: Decodable>(relativePath: String?,
-                                        method: HTTPMethod = .get,
-                                        parameters: Parameters? = nil, urlEncoding: JSONEncoding = .default, type: T.Type = T.self) -> AnyPublisher<T, BaseError> {
-
-        let urlAbsolute = baseURL.appendingPathComponent(relativePath!)
-
-        return sesionManager.request(urlAbsolute, method: method, parameters: parameters, encoding: urlEncoding, headers: nil)
-            .validate()
-#if DEBUG
-            .cURLDescription(on: .main, calling: { p in print(p) })
-#endif
-            .publishDecodable(type: T.self)
-            .tryMap({ response in
-                switch response.result {
-                case let .success(result):
-                    return result
-                case let .failure(error):
-                    throw error
-                }
-            })
-            .mapError({ [weak self] error in
-                guard let self = self else { return .generic }
-                return self.handler(error: error) ?? .generic
-            })
-            .eraseToAnyPublisher()
-    }
 
     // MARK: - Private Method
 
@@ -123,5 +91,5 @@ class BaseAPIClient {
             }
         })
     }
-}
 
+}

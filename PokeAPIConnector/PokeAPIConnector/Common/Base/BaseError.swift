@@ -7,30 +7,19 @@
 
 import Foundation
 
-enum ErrorType {
-    
-    case fullScreen(String)
-    case alert(String)
-    case form(String)
-    case popup(String)
-}
-
 enum BaseError: Error {
     case generic
     case noInternetConnection
-    case credentials
     
     func description() -> String {
         
         var description: String = ""
         
         switch self {
-        case .generic: description = "error_generic"
-        case .noInternetConnection: description = "error_no_internet_connection"
-        case .credentials: description = "error_credential"
+        case .generic: description = "Error generico"
+        case .noInternetConnection: description = "NO hay conexion"
         }
         
         return description
     }
 }
-

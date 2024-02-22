@@ -10,25 +10,27 @@ import UIKit
 class MainViewWireframe {
     
     //MARK: - Properties
-    
     var viewController: MainViewController {
         // Generating module components
-        let viewController = MainViewController()
-        let dataManager: MainViewControllerDataManager = createDataManager()
+        let viewController: MainViewController = MainViewController(nibName: nil, bundle: nil)
+        let dataManager: MainViewDataManager = createDataManager(apiClient: apiClient)
         let viewModel: MainViewModel = createViewModel(with: dataManager)
         viewController.set(viewModel: viewModel)
         return viewController
     }
     
+    private var apiClient: MainAPIClient {
+        return MainAPIClient()
+    }
     
     // MARK: - Private methods
-    private func createDataManager() -> MainViewControllerDataManager {
-        let dataManager = MainViewControllerDataManager()
+    private func createDataManager(apiClient: MainAPIClient) -> MainViewDataManager {
+        let dataManager = MainViewDataManager(apiClient: apiClient)
         return dataManager
     }
     
-    private func createViewModel(with dataManager: MainViewControllerDataManager) -> MainViewModel {
-        return MainViewModel(dataManager: MainViewControllerDataManager())
+    private func createViewModel(with dataManager: MainViewDataManager) -> MainViewModel {
+        return MainViewModel(dataManager: dataManager)
     }
     
     // MARK: - Public methods

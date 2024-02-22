@@ -10,7 +10,6 @@ import UIKit
 class DetailViewWireframe {
     
     //MARK: - Properties
-    
     var viewController: DetailViewController {
         // Generating module components
         let viewController = DetailViewController()
@@ -19,7 +18,6 @@ class DetailViewWireframe {
         viewController.set(viewModel: viewModel)
         return viewController
     }
-    
     
     // MARK: - Private methods
     private func createDataManager() -> DetailViewDataManager {

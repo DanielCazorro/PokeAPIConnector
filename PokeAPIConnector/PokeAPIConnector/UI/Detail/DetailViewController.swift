@@ -9,10 +9,30 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    //MARK: Properties
+    private var viewModel: DetailViewModel?
+    var showPokemon: Pokemon?
+
+    //MARK: IBOutlet
+    @IBOutlet weak var ivPokemonImage: UIImageView!
+    @IBOutlet weak var tvPokemonDescrption: UITextView!
+    @IBOutlet weak var lbPokemonType: UILabel!
+    @IBOutlet weak var lbPokemonAttack: UILabel!
+    @IBOutlet weak var lbPokemonDeffense: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        /*
+        // Imagen para mostrar
+        ivPokemonImage.loadFrom(URLAddress: showPokemon?.imageUrl ?? "")
+        
+        
+        lbPokemonType.text = "Tipo: \(showPokemon?.type ?? "")"
+        lbPokemonAttack.text = "Ataque: \(showPokemon!.attack)"
+        lbPokemonDeffense.text = "Defensa: \(showPokemon!.defense)"
+        tvPokemonDescrption.text = showPokemon?.description ?? ""
+         */
     }
 
 
@@ -21,4 +41,18 @@ class DetailViewController: UIViewController {
         self.viewModel = viewModel
     }
 
+}
+
+extension UIImageView {
+    func loadFrom(URLAddress: String) {
+        guard let url = URL(string: URLAddress) else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            if let imageData = try? Data(contentsOf: url) {
+                if let loadedImage = UIImage(data: imageData) {
+                    self?.image = loadedImage
+                }
+            }
+        }
+    }
 }
