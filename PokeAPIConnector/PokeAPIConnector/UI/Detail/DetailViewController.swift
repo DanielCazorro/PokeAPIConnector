@@ -11,7 +11,7 @@ class DetailViewController: UIViewController {
 
     //MARK: Properties
     private var viewModel: DetailViewModel?
-    var showPokemon: Pokemon?
+    var showPokemon: Pokemon1?
 
     //MARK: IBOutlet
     @IBOutlet weak var ivPokemonImage: UIImageView!

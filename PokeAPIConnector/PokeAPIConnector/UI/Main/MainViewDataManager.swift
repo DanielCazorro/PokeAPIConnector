@@ -14,7 +14,7 @@ class MainViewDataManager {
         self.apiClient = apiClient
     }
     
-    func getPokemonClosureNetwork(success: @escaping (Pokemon) -> Void, failure: @escaping (BaseError) -> Void) {
+    func getPokemonClosureNetwork(success: @escaping (Pokemon1) -> Void, failure: @escaping (BaseError) -> Void) {
         apiClient.getPokemonsList { pokemon in
             print(pokemon)
             success(pokemon)
@@ -34,7 +34,7 @@ class MainViewDataManager {
         }
     }
     
-    func getPokemonList(success: @escaping (Pokemon) -> Void, failure: @escaping (BaseError) -> Void) {
+    func getPokemonList(success: @escaping (Pokemon1) -> Void, failure: @escaping (BaseError) -> Void) {
         apiClient.getPokemonsList(success: success, failure: failure)
     }
     

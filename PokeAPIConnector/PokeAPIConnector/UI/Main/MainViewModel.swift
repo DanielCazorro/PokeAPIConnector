@@ -16,7 +16,7 @@ enum SwitchEnum {
 class MainViewModel {
     
     private var dataManager: MainViewDataManager
-    private var pokemon: Pokemon?
+    private var pokemon: Pokemon1?
     private var pokemonBussiness: PokemonBussiness?
     private var swNetwork: Bool = false
     private var swCombine: Bool = false
