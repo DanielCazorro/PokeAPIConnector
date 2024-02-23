@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+        /*
         let viewController = MainViewWireframe().viewController
         
         guard let scene = (scene as? UIWindowScene) else { return }
@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
         self.window = window
+         */
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
