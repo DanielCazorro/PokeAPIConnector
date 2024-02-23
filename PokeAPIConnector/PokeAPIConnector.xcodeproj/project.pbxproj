@@ -29,6 +29,8 @@
 		2CB4C68D2B70F70B00FCE7F2 /* MainViewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4C68C2B70F70B00FCE7F2 /* MainViewDataManager.swift */; };
 		2CB4C6972B7131E500FCE7F2 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4C6962B7131E500FCE7F2 /* BaseAPIClient.swift */; };
 		2CB4C6992B71322900FCE7F2 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4C6982B71322900FCE7F2 /* BaseError.swift */; };
+		2CC1D6722B8889B400234291 /* PokedexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1D6712B8889B400234291 /* PokedexController.swift */; };
+		2CC1D6752B888ADA00234291 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1D6742B888ADA00234291 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		2CB4C68C2B70F70B00FCE7F2 /* MainViewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDataManager.swift; sourceTree = "<group>"; };
 		2CB4C6962B7131E500FCE7F2 /* BaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
 		2CB4C6982B71322900FCE7F2 /* BaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseError.swift; sourceTree = "<group>"; };
+		2CC1D6712B8889B400234291 /* PokedexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexController.swift; sourceTree = "<group>"; };
+		2CC1D6742B888ADA00234291 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 		2CABE52A2B6CFF35009E8123 /* PokeAPIConnector */ = {
 			isa = PBXGroup;
 			children = (
+				2CC1D66F2B88899B00234291 /* MVCThirdForm */,
 				2CABE53F2B6D0008009E8123 /* App */,
 				2CB4C6952B7131AB00FCE7F2 /* Common */,
 				2CABE5402B6D0013009E8123 /* Models */,
@@ -184,6 +189,31 @@
 				2C72924A2B7DFD5500390D96 /* Base */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2CC1D66F2B88899B00234291 /* MVCThirdForm */ = {
+			isa = PBXGroup;
+			children = (
+				2CC1D6702B8889A800234291 /* Controller */,
+				2CC1D6732B888ACD00234291 /* Utils */,
+			);
+			path = MVCThirdForm;
+			sourceTree = "<group>";
+		};
+		2CC1D6702B8889A800234291 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2CC1D6712B8889B400234291 /* PokedexController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2CC1D6732B888ACD00234291 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2CC1D6742B888ADA00234291 /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,10 +296,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB4C6972B7131E500FCE7F2 /* BaseAPIClient.swift in Sources */,
+				2CC1D6752B888ADA00234291 /* Extensions.swift in Sources */,
 				2C70FFF62B72233000CEB5A2 /* DetailViewDataManager.swift in Sources */,
 				2CB4C67F2B70D21700FCE7F2 /* MainViewModel.swift in Sources */,
 				2C70FFF82B72233800CEB5A2 /* DetailViewWireframe.swift in Sources */,
 				2CABE5462B6D0396009E8123 /* MainViewController.swift in Sources */,
+				2CC1D6722B8889B400234291 /* PokedexController.swift in Sources */,
 				2C70FFF12B72231300CEB5A2 /* DetailViewController.swift in Sources */,
 				2CB4C68D2B70F70B00FCE7F2 /* MainViewDataManager.swift in Sources */,
 				2CB4C6812B70D22100FCE7F2 /* MainViewWireframe.swift in Sources */,
