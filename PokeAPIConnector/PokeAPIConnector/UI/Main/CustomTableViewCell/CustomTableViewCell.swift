@@ -10,31 +10,37 @@ import UIKit
 class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Properties
+    
+    // Identificador estático para reutilizar la celda
     static let identifier = "CustomTableViewCell"
     
     // MARK: - IBOutlet
+    
+    // Outlets para los elementos de la celda
     @IBOutlet weak var imPokemon: UIImageView!
     @IBOutlet weak var lbPokemonName: UILabel!
     @IBOutlet weak var lbAttack: UILabel!
     @IBOutlet weak var lbDefense: UILabel!
     
     // MARK: - Lifecycle
+    
+    // Configurar la celda cuando se despierta desde la interfaz Builder
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Round the corners of the image view
+        // Redondear las esquinas de la imagen
         imPokemon.layer.cornerRadius = 15
-        imPokemon.clipsToBounds = true // Ensure that the image view's content doesn't extend beyond its bounds
+        imPokemon.clipsToBounds = true // Asegurar que el contenido de la imagen no se extienda más allá de sus límites
     }
     
+    // Restablecer el estado de la celda antes de reutilizarla
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        // Reset the image to avoid displaying old data
+        // Restablecer la imagen para evitar mostrar datos antiguos
         imPokemon.image = nil
         lbPokemonName.text = ""
         lbAttack.text = ""
         lbDefense.text = ""
-        
     }
 }
