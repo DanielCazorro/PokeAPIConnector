@@ -6,7 +6,7 @@
 //
 
 import Foundation
-typealias PokemonBussiness = [PokemonName]
+typealias PokemonBusiness = [PokemonName]
 
 struct PokemonName: Codable, Comparable {
     let name: String

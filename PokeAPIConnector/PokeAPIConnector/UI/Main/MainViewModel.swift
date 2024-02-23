@@ -17,7 +17,7 @@ class MainViewModel {
     
     private var dataManager: MainViewDataManager
     private var pokemon: Pokemon?
-    private var pokemonBussiness: PokemonBussiness?
+    private var pokemonBussiness: PokemonBusiness?
     private var swNetwork: Bool = true
     private var swCombine: Bool = false
     
