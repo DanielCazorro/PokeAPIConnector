@@ -67,20 +67,16 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Obtener el número de filas de la tabla del viewModel
-        return viewModel?.rowsInSection() ?? 0
+        return viewModel?.pokemonList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else {
-            // Si no se puede obtener una celda reutilizable, retornar una celda vacía
             return UITableViewCell()
         }
         
-        // Configurar la celda con datos del viewModel
-        if let viewModel = viewModel {
-            let pokemonData = viewModel.cellFor(row: indexPath.row)
-            cell.lbPokemonName.text = pokemonData
-            // Se puede continuar configurando otros elementos de UI en la celda aquí
+        if let pokemon = viewModel?.pokemonList[indexPath.row] {
+            cell.lbPokemonName.text = pokemon.name
         }
         
         return cell

@@ -11,6 +11,8 @@ import Alamofire
 
 class MainAPIClient: BaseAPIClient {
     
+    let pokemonListURL = "pokemon"
+    
     // URL base para la API de Pokemon
     let baseURL = "https://pokeapi.co/api/v2/"
     
@@ -34,5 +36,13 @@ class MainAPIClient: BaseAPIClient {
     func getPokemonsListCombine() -> AnyPublisher<Pokemon, BaseError> {
         // Utilizamos el método requestPublisher de BaseAPIClient para obtener un publisher de tipo AnyPublisher<Pokemon, BaseError>
         requestPublisher(relativePath: pokemonURL, method: .get, parameters: nil, urlEncoding: JSONEncoding.default, type: Pokemon.self)
+    }
+    
+    func getPokemonList(success: @escaping ([PokemonName]) -> Void, failure: @escaping (BaseError) -> Void) {
+        request(pokemonListURL, method: .get, headers: [:], parameters: nil)
+            .validate()
+            .responseDecodable(of: [PokemonName].self) { response in
+                self.handleResponse(success: success, failure: failure, dataResponse: response)
+            }
     }
 }

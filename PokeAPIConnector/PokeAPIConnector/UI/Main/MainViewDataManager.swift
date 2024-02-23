@@ -57,4 +57,8 @@ class MainViewDataManager {
             }
             .eraseToAnyPublisher()
     }
+    
+    func getPokemonList(success: @escaping ([PokemonName]) -> Void, failure: @escaping (BaseError) -> Void) {
+        apiClient.getPokemonList(success: success, failure: failure)
+    }
 }

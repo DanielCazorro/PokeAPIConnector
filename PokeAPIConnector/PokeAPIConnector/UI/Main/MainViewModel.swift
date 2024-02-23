@@ -15,6 +15,8 @@ enum SwitchEnum {
 
 class MainViewModel {
     
+    var pokemonList: [PokemonName] = []
+    
     private var dataManager: MainViewDataManager
     private var pokemon: Pokemon?  // Datos de Pokemon obtenidos de la API
     private var pokemonBusiness: PokemonBusiness?  // Datos de Pokemon procesados para la lógica de negocio
@@ -144,5 +146,14 @@ class MainViewModel {
                 self?.reloadTableView.send()
             }
             .store(in: &cancellables)
+    }
+    
+    func getPokemonList() {
+        dataManager.getPokemonList(success: { [weak self] pokemonList in
+            self?.pokemonList = pokemonList
+            self?.reloadTableView.send()
+        }, failure: { error in
+            print(error)
+        })
     }
 }
