@@ -53,7 +53,7 @@ extension MainViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
 
         let pokemonEntry = pokemonEntries[indexPath.row]
-        cell.lbPokemonName.text = pokemonEntry.name ?? ""
+        cell.lbPokemonName.text = pokemonEntry.name 
         // Aquí puedes agregar más configuraciones de celda según tus necesidades
         return cell
     }
